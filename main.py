@@ -8,27 +8,26 @@ def rolar():
 #Função secundária para rolar o resultado. Iterada várias vezes caso o número de dados rolados seja maior que 1.
   
   def rolar_dado(tipo):
-    try:
-      if tipo == 4:
+    result = None
+    match tipo:
+      case 4:
         result = random.randrange(1,4)
-      if tipo == 6:
+      case 6:
         result = random.randrange(1,6)
-      if tipo == 8:
+      case 8:
         result = random.randrange(1,8)      
-      if tipo == 10:
-        result = random.randrange(1,10)        
-      if tipo == 12:
+      case 10:
+         result = random.randrange(1,10)        
+      case 12:
         result = random.randrange(1,12)       
-      if tipo == 20:
+      case 20:
         result = random.randrange(1,20)     
-      if tipo == 100:
+      case 100:
         result = random.randrange(1,100)
-
-      valores.append(result)
-      print(result)
-      
-    except:
-      print("Tipo de dado inválido")
+      case _: print("Tipo de dado inválido")
+    
+    valores.append(result)
+    print(result)
 # ---------------
 #Função principal para rolar dados (cont.)
   try:
@@ -37,16 +36,15 @@ def rolar():
     qnt = int(qnt)
     tipo = int(tipo)
     
+    if qnt == 1:
+      rolar_dado(tipo)
+    if qnt > 1:
+      for i in range(qnt):
+        rolar_dado(tipo)
+        total = sum(valores)
+      print("Total:",total)
+  
   except:
     print("ERRO! Role um dado no formato #d#:")
 
-  if qnt == 1:
-    rolar_dado(tipo)
-  if qnt > 1:
-    for i in range(qnt):
-      rolar_dado(tipo)
-      total = sum(valores)
-    
-    print("Total:",total)
-      
 rolar()
